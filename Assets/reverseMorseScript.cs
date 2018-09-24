@@ -841,7 +841,7 @@ public class reverseMorseScript : MonoBehaviour
         }
     }
 
-    private string TwitchHelpMessage = @"Use '!{0} .-. br ..-. br tx' to submit the morse corde. Use '!{0} rs' to reset the input.";
+    private string TwitchHelpMessage = @"Use '!{0} .-. br ..-. br tx' to submit the morse code. Use '!{0} rs' to reset the input.";
 
     IEnumerator ProcessTwitchCommand(string command)
     {

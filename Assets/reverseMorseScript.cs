@@ -840,4 +840,33 @@ public class reverseMorseScript : MonoBehaviour
             screens[1].text = symbolOptions[0];
         }
     }
+
+    private string TwitchHelpMessage = @"Use '!{0} .-. br ..-. br tx' to submit the morse corde. Use '!{0} rs' to reset the input.";
+
+    IEnumerator ProcessTwitchCommand(string command)
+    {
+        var parts = command.ToLowerInvariant().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+        if (parts.Length > 0 && parts.All(part => (part.Length == 2 && (part == "br" || part == "tx" || part == "rs")) || (part.All(c => "-.".Contains(c)))))
+        {
+            yield return null;
+
+            for (int i = 0; i < parts.Length; i++)
+            {
+                if (parts[i] == "br") { OnBreakButton(); }
+                else if (parts[i] == "tx") { OnSpaceButton(); }
+                else if (parts[i] == "rs") { OnResetButton(); }
+                else
+                {
+                    foreach (char c in parts[i])
+                    {
+                        if (c == '-') { OnDashButton(); }
+                        else if (c == '.') { OnDotButton(); }
+                        yield return new WaitForSeconds(.1f);
+                    }
+                }
+                yield return new WaitForSeconds(.1f);
+            }
+        }
+    }
 }

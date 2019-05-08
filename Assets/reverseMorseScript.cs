@@ -853,6 +853,7 @@ public class reverseMorseScript : MonoBehaviour
 
             for (int i = 0; i < parts.Length; i++)
             {
+                if (transmitting) yield return new WaitUntil(() => !transmitting);
                 if (parts[i] == "br") { OnBreakButton(); }
                 else if (parts[i] == "tx") { OnSpaceButton(); }
                 else if (parts[i] == "rs") { OnResetButton(); }
